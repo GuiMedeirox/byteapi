@@ -5,7 +5,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -18,26 +17,27 @@ model User {
   phone   String
   address String
 
-  @@map("users")
+  Order   Order? @relation(fields: [orderId], references: [id])
+  orderId Int?
 
+  @@map("users")
 }
 
 model Order {
   id            Int      @id @default(autoincrement())
+  userId        User[]
   dateTimeOrder DateTime @default(now())
   description   String
   price         Int
 
   @@map("orders")
-
 }
 
 model Menu {
-  id    Int   @id @default(autoincrement())
-  item String 
+  id    Int    @id @default(autoincrement())
+  item  String
   name  String
   value Float
 
   @@map("menu")
-
 }
