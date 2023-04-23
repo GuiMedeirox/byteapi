@@ -11,12 +11,12 @@ datasource db {
 }
 
 model User {
-  id      Int    @id @default(autoincrement())
-  name    String
-  cpf     String @unique
-  phone   String
-  address String
-  username   String
+  id          Int    @id @default(autoincrement())
+  name        String
+  cpf         String @unique
+  phone       String
+  address     String
+  username    String
   password    String
 
   Order   Order? @relation(fields: [orderId], references: [id])
@@ -29,7 +29,8 @@ model Order {
   id            Int      @id @default(autoincrement())
   userId        User[]
   dateTimeOrder DateTime @default(now())
-  description   String
+  description   String   @default("pending")
+  status        String
   price         Int
 
   @@map("orders")

@@ -16,7 +16,8 @@ CREATE TABLE "users" (
 CREATE TABLE "orders" (
     "id" SERIAL NOT NULL,
     "dateTimeOrder" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "description" TEXT NOT NULL,
+    "description" TEXT NOT NULL DEFAULT 'pending',
+    "status" TEXT NOT NULL,
     "price" INTEGER NOT NULL,
 
     CONSTRAINT "orders_pkey" PRIMARY KEY ("id")

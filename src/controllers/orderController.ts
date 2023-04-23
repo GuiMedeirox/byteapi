@@ -11,7 +11,7 @@ export default{
             if(!userExist){
                 return response.json({ error: true, message: 'Erro: o Pedido informado não existe' });
             }          
-            const order = await prisma.order.create({ data: { id , dateTimeOrder, description, price } });
+            const order = await prisma.order.create({ data: { id , dateTimeOrder, description, price, status } });
             return response.json({
                 error: false, 
                 message: 'Pedido cadastrado com sucesso!',
@@ -58,7 +58,7 @@ export default{
     async updateOrder(request: Request, response: Response){        
         
         try{   
-            const { id, description, price } = request.body; 
+            const { id, description, price, status } = request.body; 
             const orderExists = await prisma.order.findUnique({ where: {id: Number(id)} });
             if(!orderExists){
                 return response.json({ error: true, message: 'Pedido não cadastrado.' });
@@ -70,6 +70,7 @@ export default{
                 },
                 data:{
                     description,
+                    status,
                     price
                 }
             });
