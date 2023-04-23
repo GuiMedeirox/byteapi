@@ -1,5 +1,6 @@
 import {Request, Response} from 'express'; 
 import { prisma } from '../database';
+import bcrypt from 'bcrypt';
 
 export default{
 
@@ -7,17 +8,17 @@ export default{
 
         try{           
                         
-            const { name, phone, cpf, address } = request.body;            
-            const userExist = await prisma.user.findUnique({ where: {cpf} });
+            const { username, password, name, phone, cpf, address } = request.body;       
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const userExist = await prisma.user.findUnique({ where: { cpf } });
 
             if(userExist){
                 return response.json({ error: true, message: 'Erro: usuário já existente' });
             }
             
-            const user = await prisma.user.create({ data: { address, cpf, name, phone } });
+            const user = await prisma.user.create({ data: { username, password:hashedPassword, address, cpf, name, phone } });
             
             return response.json({
-                error: false, 
                 message: 'Usuário cadastrado com sucesso!',
                 user
                 
@@ -61,7 +62,7 @@ export default{
     async updateUser(request: Request, response: Response){        
         
         try{   
-            const { id, name, cpf, phone, address } = request.body; 
+            const { id, name, cpf, phone, address, username, password } = request.body; 
             const userExists = await prisma.user.findUnique({ where: {id: Number(id)} });
             if(!userExists){
                 return response.json({ error: true, message: 'Usuário não cadastrado.' });

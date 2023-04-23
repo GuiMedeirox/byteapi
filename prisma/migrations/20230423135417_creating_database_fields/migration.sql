@@ -5,6 +5,9 @@ CREATE TABLE "users" (
     "cpf" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
     "address" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "orderId" INTEGER,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -31,3 +34,6 @@ CREATE TABLE "menu" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_cpf_key" ON "users"("cpf");
+
+-- AddForeignKey
+ALTER TABLE "users" ADD CONSTRAINT "users_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "orders"("id") ON DELETE SET NULL ON UPDATE CASCADE;

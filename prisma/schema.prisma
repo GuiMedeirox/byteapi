@@ -16,6 +16,8 @@ model User {
   cpf     String @unique
   phone   String
   address String
+  username   String
+  password    String
 
   Order   Order? @relation(fields: [orderId], references: [id])
   orderId Int?
