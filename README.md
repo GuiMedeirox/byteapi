@@ -13,7 +13,13 @@ nodejs, bcrypt, postgresql
 
 ## Uso 
 
+> yarn prisma generate
+
+> yarn prisma migrate dev
+
 > yarn dev 
+
+
 
 startando a API
 
