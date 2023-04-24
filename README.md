@@ -19,10 +19,6 @@ nodejs, bcrypt, postgresql
 
 > yarn dev 
 
-
-
-startando a API
-
 ### Endpoints
 
 ```leia sobre os campos necessários para cada endpoints no schema.prisma ```
