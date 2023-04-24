@@ -64,3 +64,7 @@ startando a API
 /deleteMenu/id
 
 ```
+
+--- 
+
+Em breve: autenticação utilizando jwt
